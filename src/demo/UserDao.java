@@ -20,4 +20,13 @@ public class UserDao {
             }
         }
     }
+
+    public String searchByName(String name) throws SQLException {
+        try (PreparedStatement ps = conn.prepareStatement("SELECT name FROM users WHERE name = ?")) {
+            ps.setString(1, name);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? rs.getString(1) : null;
+            }
+        }
+    }
 }
