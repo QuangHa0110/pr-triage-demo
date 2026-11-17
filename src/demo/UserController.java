@@ -22,4 +22,14 @@ public class UserController extends HttpServlet {
             response.sendError(500);
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String name = request.getParameter("name");
+        try {
+            response.getWriter().println(dao.searchByName(name));
+        } catch (SQLException e) {
+            response.sendError(500);
+        }
+    }
 }
